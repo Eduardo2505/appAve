@@ -1,0 +1,213 @@
+<!--
+  Generated template for the AccionSolicitudPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>
+      Acciones
+    </ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+			<ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top color="primary">
+
+    <ion-segment [(ngModel)]="pet" color="secondary">
+      <ion-segment-button value="archivos">
+        Anexos
+      </ion-segment-button>
+      <ion-segment-button value="pagos">
+        Pagos
+      </ion-segment-button>
+      <ion-segment-button value="cerrar">
+        Cerrar
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <div [ngSwitch]="pet">
+
+    <ion-list *ngSwitchCase="'cerrar'">
+
+      <div *ngIf="estado ==true">
+        <ion-list>
+          <ion-list-header>Cerrar y Asigar</ion-list-header>
+          <ion-item>
+            <ion-icon name="person" item-left></ion-icon>
+            <ion-label stacked>Empleado:</ion-label>
+            <ion-select [(ngModel)]="todo.idempleado" multiple="false" okText="Selecionar" cancelText="Cancelar">
+
+              <ion-option *ngFor="let i of empleados" value="{{i.idempleado}}">{{i.Nombre}} {{i.apellidos}}</ion-option>
+
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <button (click)="cerrar()" ion-button round color="info" block icon-left>
+      <ion-icon name="send"></ion-icon> Cerrar
+    </button>
+
+      </div>
+      <div *ngIf="estado ==false">
+        <button ion-button round color="info" (click)="cambioEstado()" block icon-left>
+      <ion-icon name="send"></ion-icon> Cerrar 
+    </button>
+      </div>
+
+
+      <ion-list>
+        <ion-list-header>Estados</ion-list-header>
+        <ion-item *ngFor="let i of estados">
+          <ion-icon name="checkmark-circle" item-left></ion-icon>
+          <h2>{{i.estado}}</h2>
+          <p>{{i.nombre}} {{i.apellidos}}</p>
+        </ion-item>
+
+      </ion-list>
+
+
+    </ion-list>
+    <ion-list *ngSwitchCase="'archivos'">
+
+
+      <ion-list>
+
+        <ion-list-header>Anexos</ion-list-header>
+
+
+        <ion-grid class="botonescentrados">
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,1)">
+                <ion-icon name="ios-cash"></ion-icon>
+                 Acreditado
+                </button>
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,2)">
+                  <ion-icon name="ios-home"></ion-icon>
+                   Predial
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,3)">
+                  <ion-icon name="ios-list-box"></ion-icon>
+                   Escritura
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,4)">
+                  <ion-icon name="ios-map"></ion-icon>
+                  Plano
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,5)">
+                 <ion-icon name="md-person"></ion-icon>
+                  Vendedor
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,6)">
+                  <ion-icon name="ios-water"></ion-icon>
+                   Boleta de Agua
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,7)">
+                  <ion-icon name="ios-podium"></ion-icon>
+                  Licencia de construcción
+            </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left round color="info" block (click)="anexos(IDregistro,8)">
+                  <ion-icon name="ios-image"></ion-icon>
+                  Fotos
+            </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+
+      </ion-list>
+
+
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'pagos'">
+
+
+
+
+      <form [formGroup]="todoform" (ngSubmit)="registraPago()">
+        <ion-list-header>Pagos</ion-list-header>
+        <ion-item>
+          <ion-icon name="logo-usd" item-left></ion-icon>
+          <ion-label stacked>Cantidad:</ion-label>
+          <ion-input type="number" formControlName="cantidad"></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-icon name="thumbs-up" item-left></ion-icon>
+          <ion-label stacked>Descripción:</ion-label>
+          <ion-textarea formControlName="descripcion"></ion-textarea>
+        </ion-item>
+
+        <button ion-button round color="info" block icon-left type="submit" [disabled]="!todoform.valid">
+          <ion-icon name="send"></ion-icon> Enviar
+      </button>
+      </form>
+
+
+
+      <ion-list>
+        <ion-list-header>Pagos</ion-list-header>
+
+        <ion-item-sliding #item *ngFor="let i of pagos">
+          <ion-item>
+            <ion-icon name="checkmark-circle" item-left></ion-icon>
+            <h2>$ {{i.anticipo}} </h2>
+            <p>{{i.descripcion}} </p>
+            <p> {{i.registro}}</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="eliminar(i.idpagos)">Eliminar</button>
+          </ion-item-options>
+       
+        </ion-item-sliding>
+      </ion-list>
+
+
+  TOTAL: $ {{sumita}} 
+    </ion-list>
+
+  </div>
+
+</ion-content>

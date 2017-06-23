@@ -1,0 +1,191 @@
+<!--
+  Generated template for the DetallesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Detalles</ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+			<ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>Información</ion-list-header>
+    <ion-item>
+
+      <h3>Nombre de referencia:</h3>
+      <p>{{registro.referencia}}</p>
+    </ion-item>
+    <ion-item>
+
+
+
+      <ion-row>
+        <ion-col col-7>
+          <h3>Num. Expediente:</h3>
+          <p>{{registro.num_expediente}}</p>
+        </ion-col>
+        <ion-col col-5>
+          <h3>Teléfono:</h3>
+          <p>{{registro.telefono}}</p>
+        </ion-col>
+      </ion-row>
+
+
+
+    </ion-item>
+    <ion-item>
+
+
+      <ion-row>
+        <ion-col col-7>
+          <h3>Num. Avalúo:</h3>
+          <p>{{registro.num_avaluo}}</p>
+        </ion-col>
+        <ion-col col-5>
+          <h3>Costo:</h3>
+          <p>{{registro.costo| currency }}</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+
+    <ion-item>
+      <h3>Email:</h3>
+      <p>{{registro.email}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Tipo Avaluo: </h3>
+      <p>{{registro.nomtipoava}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Objeto de avalúo:</h3>
+      <p>{{registro.nomobjetivo}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Otros:</h3>
+      <p>{{registro.otros}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Ubicación:</h3>
+      <div col-12>{{registro.ubicacion}}</div>
+    </ion-item>
+
+    <!--Este es la parte de avaluo-->
+    <ion-list-header>Avalúo</ion-list-header>
+    <ion-item>
+      <h3>Inspector:</h3>
+      <p>{{registro.Nombre}} {{registro.apellidos}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col col-6>
+          <h3>Monto crédito:</h3>
+          <p>{{registro.monto_credito | currency}}</p>
+        </ion-col>
+        <ion-col col-5>
+          <h3>Monto venta:</h3>
+          <p>{{registro.monto_venta| currency}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <h3>Intermediario:</h3>
+      <p>{{registro.nomIntermediria}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Capturista:</h3>
+      <p>{{registro.capturista}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Asigno:</h3>
+      <p>{{registro.asigno}}</p>
+    </ion-item>
+    <ion-item>
+      <h3>Observaciones:</h3>
+      <p>{{registro.observaciones}}</p>
+    </ion-item>
+    <ion-item>
+
+      <ion-row>
+
+        <ion-col col-6>
+          <h3>Inspección:</h3>
+          <p>{{FechaInspeccion}}</p>
+          <p>{{FechaInspeccionNom}}</p>
+          <p class="colorPendiente" >{{registro.fecha_de_inspeccion}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <h3>Hora de inspección :</h3>
+          <p>{{registro.hora_de_inspeccion}}</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col col-6>
+          <h3>Quien recibe:</h3>
+          <p>{{registro.usuario_entrega}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <h3>Entrega de visita:</h3>
+          <p>{{FechaVisita}}</p>
+          <p>{{FechaVisitaNom}}</p>
+          <p class="colorPendiente">{{registro.fecha_de_entrega}}</p>
+        </ion-col>
+      </ion-row>
+      <h3></h3>
+      <p></p>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col col-6>
+          <h3>Asiganción:</h3>
+          <p>{{FechaAsignacion}}</p>
+          <p>{{FechaAsignacionNom}}</p>
+          <p class="colorPendiente">{{registro.fecha_asigancion}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <h3>Captura:</h3>
+          <p>{{FechaCaptura}}</p>
+          <p>{{FechaCapturaNom}}</p>
+          <p class="colorPendiente">{{registro.fecha_captura}}</p>
+        </ion-col>
+      </ion-row>
+      <h3></h3>
+      <p></p>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col col-6>
+          <h3>Cierre:</h3>
+          <p>{{FechaCierre}}</p>
+          <p>{{FechaCierreNom}}</p>
+          <p class="colorPendiente">{{registro.fecha_cierre}}</p>
+        </ion-col>
+        <ion-col col-6>
+          <h3>Estado:</h3>
+          <p>{{registro.estado}}</p>
+        </ion-col>
+      </ion-row>
+      <h3></h3>
+      <p></p>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

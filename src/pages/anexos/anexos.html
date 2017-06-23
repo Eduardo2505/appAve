@@ -1,0 +1,51 @@
+<!--
+  Generated template for the AnexosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>Anexos</ion-title>
+    <ion-buttons left>
+      <button ion-button navPop icon-only>
+			<ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Archivo"></ion-searchbar>
+
+  <ion-list>
+    <ion-item-sliding #item *ngFor="let i of registros">
+      <ion-item (click)="launchUrl(i.urlDropbox)">
+        <ion-icon name="ios-albums" item-left></ion-icon>
+        {{i.descripcion}} {{i.usuario}}
+
+
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-footer>
+    <ion-toolbar color="primary">
+      <ion-buttons>
+
+
+        <button ion-button icon-left (click)="galeria()">
+              <ion-icon name="cloud-upload"></ion-icon>Cargar de Galería
+           </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-content>
