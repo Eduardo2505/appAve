@@ -37,7 +37,7 @@ export class AnexosPage {
     this.platform = platform;
     this.getAnexos("");
   }
-
+//falta Subir Anexos
   ionViewDidLoad() {
     this.viewCtrl.showBackButton(false);
 
