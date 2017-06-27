@@ -335,7 +335,7 @@ export class AccionSolicitudPage {
   }
 
   anexos(IDregistro, tipo) {
-    this.navCtrl.push(AnexosPage, { IDregistro: IDregistro, tipo: tipo });
+    this.navCtrl.push(AnexosPage, { IDregistro: IDregistro, tipo: tipo,nombreUser:this.nombreUser });
   }
 
 

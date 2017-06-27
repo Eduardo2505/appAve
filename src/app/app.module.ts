@@ -23,6 +23,7 @@ import { SubSolicitudesPage } from '../pages/sub-solicitudes/sub-solicitudes';
 import { AjustesPage } from '../pages/ajustes/ajustes';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { AnexosPage } from '../pages/anexos/anexos';
+import { PopImagenPage } from '../pages/pop-imagen/pop-imagen';
 import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable';
 
 
@@ -48,6 +49,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     MenuDesplegablePage,
     AnexosPage,
     SolicitudesAprobadasPage,
+    PopImagenPage,
     LoginPage
   ],
   imports: [
@@ -71,6 +73,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     MenuDesplegablePage,
     SolicitudesAprobadasPage,
     AnexosPage,
+    PopImagenPage,
     LoginPage
   ],
   providers: [

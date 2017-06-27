@@ -311,4 +311,25 @@ export class SolicitudesSevicioProvider {
     );
   }
 
+  addAnexo(idregistro, url,usuario,tipo) {
+    var headers = new Headers();
+
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    var params = 'idregistro=' + idregistro + "&url=" + url+"&usuario="+usuario+"&tipo="+tipo;
+    return new Promise<any>(
+      resolve => {
+       this.http.post(this.url + "/app/addAnexo", params, { headers: headers })
+          .map(res => res.json())
+          .subscribe(
+          data => {
+            resolve(data);
+          },
+          err => {
+            console.log(err);
+          }
+          )
+      }
+    );
+  }
+
 }
