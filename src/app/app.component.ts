@@ -6,7 +6,6 @@ import { LoginPage } from '../pages/login/login';
 
 
 
-
 @Component({
   templateUrl: 'app.html'
 })

@@ -30,7 +30,8 @@ import { LoginPage } from '../pages/login/login';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { ImagePicker } from '@ionic-native/image-picker';
 
-
+import { IonicStorageModule } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -76,6 +78,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
     SplashScreen,
     Transfer,
     ImagePicker,
+    InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoginServicioProvider, SolicitudesSevicioProvider,
     VarGlobalesProvider

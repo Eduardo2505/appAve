@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController,ModalController } from 'ionic-angular';
 
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
 
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {PopImagenPage} from '../pop-imagen/pop-imagen';
 
 @IonicPage()
 @Component({
@@ -28,7 +30,9 @@ export class AnexosPage {
     public platform: Platform,
     private imagePicker: ImagePicker,
     public loadingCtrl: LoadingController,
-    private transfer: Transfer) {
+    private transfer: Transfer,
+    private iab: InAppBrowser,
+    private modal:ModalController) {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
@@ -37,18 +41,14 @@ export class AnexosPage {
     this.platform = platform;
     this.getAnexos("");
   }
-//falta Subir Anexos
+  //falta Subir Anexos
   ionViewDidLoad() {
     this.viewCtrl.showBackButton(false);
 
   }
   galeria() {
 
-    let loading = this.loadingCtrl.create({
-      content: 'Subiendo imagen...'
-    });
 
-    loading.present();
 
     let options = {
       quality: 25,
@@ -56,6 +56,11 @@ export class AnexosPage {
     };
 
     this.imagePicker.getPictures(options).then((results) => {
+      let loading = this.loadingCtrl.create({
+        content: 'Subiendo imagen...'
+      });
+
+      loading.present();
       for (var i = 0; i < results.length; i++) {
         //console.log('Image URI: ' + results[i]);
 
@@ -63,7 +68,7 @@ export class AnexosPage {
         var f = new Date();
         this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
 
-        this.nombreArchivo = this.folio + i+"_" + this.tipo + "_" + this.IDregistro;
+        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro;
 
 
         let options1: FileUploadOptions = {
@@ -90,17 +95,18 @@ export class AnexosPage {
     }, (err) => { });
 
   }
-  verURL() {
-    this.platform.ready().then(() => {
-      open("https://db.tt/ontieTp5tx", "_blank", "location=no");
-    });
 
-  }
+
+
   launchUrl(url) {
     //console.log(url);
-    this.platform.ready().then(() => {
-      open(url, "_blank", "location=no");
-    });
+    const browser = this.iab.create(url, "_system");
+  }
+
+  pop(url,desc) {
+    this.modal.create(PopImagenPage,{url:url,des:desc});
+    //console.log("Pop");
+
   }
 
 

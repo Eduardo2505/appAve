@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { VarGlobalesProvider } from '../var-globales/var-globales';
+import { Platform } from 'ionic-angular'
 
 
 
@@ -26,9 +27,9 @@ export class LoginServicioProvider {
   // url = "http://adminave.pvessy.com/Ave";
 
 
-  constructor(public http: Http, public varGlobal: VarGlobalesProvider) {
+  constructor(public http: Http, public varGlobal: VarGlobalesProvider, private platform: Platform) {
     this.url = varGlobal.ulr;
-   
+
   }
 
 
@@ -46,7 +47,9 @@ export class LoginServicioProvider {
           .map(res => res.json())
           .subscribe(
           data => {
+
             resolve(data);
+
           },
           err => {
             console.log(err);
@@ -64,6 +67,7 @@ export class LoginServicioProvider {
       observer.complete();
     });
 
+
   }
 
   public logout() {
@@ -74,5 +78,31 @@ export class LoginServicioProvider {
     });
   }
 
+  guardarStorage() {
+    console.log("Entro a guardar");
+    if (this.platform.is("cordova")) {
+      // dispositiv
 
+    } else {
+      //console.log(">>>>>>>>><"+JSON.stringify(this.currentUser));
+      localStorage.setItem("User", JSON.stringify(this.currentUser));
+
+    }
+
+  }
+  cargarStorage() {
+    console.log("Entro a guardar");
+    if (this.platform.is("cordova")) {
+      // dispositiv
+
+    } else {
+
+      if (localStorage.getItem("User")) {
+        this.currentUser = JSON.parse(localStorage.getItem("User"));
+
+      }
+
+    }
+
+  }
 }

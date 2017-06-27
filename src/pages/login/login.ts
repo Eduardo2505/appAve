@@ -43,17 +43,23 @@ export class LoginPage {
         if (resultado != 0) {
           this.nombre = data[0]["Nombre"] + " " + data[0]["apellidos"];
           this.idempleado = data[0]["idempleado"];
+          console.log("info >>>><" + this.idempleado);
 
           this.auth.sesionUser(this.nombre, this.registerCredentials.email, this.idempleado).subscribe(allowed => {
             if (allowed) {
 
-
+            //  this.auth.cargarStorage();
               this.navCtrl.push(TabsPage);
+             
             }
           },
             error => {
+             
               this.showError(error);
+            
             });
+
+
 
 
         } else {
@@ -64,6 +70,7 @@ export class LoginPage {
       )
       .catch(
       error => {
+        console.log("Erro "+error);
         this.showError(error);
       }
       )

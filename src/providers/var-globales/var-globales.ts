@@ -9,8 +9,8 @@ export class VarGlobalesProvider {
   public ulr: string;
 
   constructor(public http: Http) {
-     //this.ulr = "http://127.0.0.1/Ave";
-    this.ulr="http://desa.pvessy.com/Avedesa/";
+    this.ulr = "http://127.0.0.1/Ave";
+   // this.ulr="http://desa.pvessy.com/Avedesa/";
   }
 
 }
