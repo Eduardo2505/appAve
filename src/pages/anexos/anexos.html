@@ -23,13 +23,18 @@
 
   <ion-list>
     <ion-item-sliding #item *ngFor="let i of registros">
-      <ion-item (click)="launchUrl(i.url,i.urlDropbox,i.descripcion)">
+      <ion-item (click)="launchUrl(i.urlDropbox)" ng-if="i.urlDropbox!=1">
         <ion-icon name="ios-albums" item-left></ion-icon>
-        {{i.descripcion}} 
+        {{i.descripcion}} {{i.usuario}}
 
 
       </ion-item>
-      
+      <ion-item (click)="pop(i.url,i.descripcion)" ng-if="i.urlDropbox==1">
+        <ion-icon name="ios-albums" item-left></ion-icon>
+        {{i.descripcion}} {{i.usuario}}
+
+
+      </ion-item>
 
     </ion-item-sliding>
   </ion-list>

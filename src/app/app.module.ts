@@ -2,17 +2,27 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
-
 import { TabsPage } from '../pages/tabs/tabs';
-
-import { LoginServicioProvider } from '../providers/login-servicio/login-servicio';
-import { VarGlobalesProvider } from '../providers/var-globales/var-globales';
-import { SolicitudesSevicioProvider } from '../providers/solicitudes-sevicio/solicitudes-sevicio';
-import { HttpModule } from '@angular/http';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+//================================== Nuevos ======================
+
+/* ================= Modulos ======================== */
+import { HttpModule } from '@angular/http';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { IonicStorageModule } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+//Son externos
+import { LoginServicioProvider } from '../providers/login-servicio/login-servicio';
+import { VarGlobalesProvider } from '../providers/var-globales/var-globales';
+import { SolicitudesSevicioProvider } from '../providers/solicitudes-sevicio/solicitudes-sevicio';
+
+
+//paginas
 import { DetallesPage } from '../pages/detalles/detalles';
 import { InicioPage } from '../pages/inicio/inicio';
 import { ContactoPage } from '../pages/contacto/contacto';
@@ -23,16 +33,9 @@ import { SubSolicitudesPage } from '../pages/sub-solicitudes/sub-solicitudes';
 import { AjustesPage } from '../pages/ajustes/ajustes';
 import { PerfilPage } from '../pages/perfil/perfil';
 import { AnexosPage } from '../pages/anexos/anexos';
-import { PopImagenPage } from '../pages/pop-imagen/pop-imagen';
 import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable';
-
-
 import { LoginPage } from '../pages/login/login';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { ImagePicker } from '@ionic-native/image-picker';
 
-import { IonicStorageModule } from '@ionic/storage';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -49,14 +52,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     MenuDesplegablePage,
     AnexosPage,
     SolicitudesAprobadasPage,
-    PopImagenPage,
     LoginPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -73,18 +74,18 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     MenuDesplegablePage,
     SolicitudesAprobadasPage,
     AnexosPage,
-    PopImagenPage,
     LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Transfer,
+    FileTransfer,
     ImagePicker,
     InAppBrowser,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    FileTransferObject,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginServicioProvider, SolicitudesSevicioProvider,
     VarGlobalesProvider
   ]
 })
-export class AppModule { }
+export class AppModule {}

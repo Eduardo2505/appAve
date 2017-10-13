@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController,ModalController } from 'ionic-angular';
 
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
 
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { PopImagenPage } from '../pop-imagen/pop-imagen';
-
+import {PopImagenPage} from '../pop-imagen/pop-imagen';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,6 @@ export class AnexosPage {
   public buscar: string;
   private nombreArchivo: string;
   private folio: string;
-  private nombreUser: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,16 +31,14 @@ export class AnexosPage {
     public platform: Platform,
     private imagePicker: ImagePicker,
     public loadingCtrl: LoadingController,
-    private transfer: Transfer,
+    private transfer: FileTransfer,
     private iab: InAppBrowser,
-    private modal: ModalController) {
+    private modal:ModalController) {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
-    this.nombreUser = this.navParams.get('nombreUser');
-
-    console.log(this.nombreUser);
-
+    console.log("tipo: " + this.tipo);
+    console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
   }
@@ -51,76 +48,72 @@ export class AnexosPage {
 
   }
   galeria() {
+
+
+
     let options = {
-      quality: 25
+      quality: 25,
+      maximumImagesCount: 10
     };
-    var f = new Date();
-    
-    let loading = this.loadingCtrl.create({
-      content: 'Subiendo imagen...'
-    });
-    loading.present();
+
     this.imagePicker.getPictures(options).then((results) => {
-
-      for (var i = 0; i < results.length; i++) {
-       
-        this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
-        this.nombreArchivo = this.folio + "_" + i + "_" + this.tipo + "_" + this.IDregistro + ".jpg";
-        this.solicitudes.addAnexo(this.IDregistro, this.nombreArchivo, this.nombreUser, this.tipo);
-
-      }
-
-    }, (err) => {
-
-
-
-    });
-    loading.dismiss();
-    this.initializeItems();
-    this.getAnexos("");
-
-
-
-  }
-
-
-
-  launchUrl(url, drop, desc) {
-
-    if (drop === '1') {
-      let profileModal = this.modal.create(PopImagenPage, { url: url, des: desc });
-      profileModal.present();
-      console.log("Modal");
-    } else {
-
-      const browser = this.iab.create(drop, "_system");
-      console.log("link");
-    }
-
-  }
-  subir(arhivo) {
-
-    const fileTransfer: TransferObject = this.transfer.create();
-    let options1: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: this.nombreArchivo,
-      headers: {}
-
-    }
-    fileTransfer.upload(arhivo, 'http://adminave.pvessy.com/ionic/upload.php', options1)
-      .then((data) => {
-
-      }, (err) => {
-        // error
-        alert("error" + JSON.stringify(err));
+      let loading = this.loadingCtrl.create({
+        content: 'Subiendo imagen...'
       });
 
+      loading.present();
+      for (var i = 0; i < results.length; i++) {
+        //console.log('Image URI: ' + results[i]);
+
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        var f = new Date();
+        this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
+
+        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro;
+
+
+        let options1: FileUploadOptions = {
+          fileKey: 'file',
+          fileName: this.nombreArchivo,
+          headers: {}
+
+        }
+
+        fileTransfer.upload(results[i], 'http://adminave.pvessy.com/ionic/upload.php', options1)
+          .then((data) => {
+            // success
+            loading.dismiss();
+            // alert("Se subio");
+
+          }, (err) => {
+            // error
+            alert("error" + JSON.stringify(err));
+          });
+
+
+
+      }
+    }, (err) => { });
+
   }
 
+
+
+  launchUrl(url) {
+    //console.log(url);
+    const browser = this.iab.create(url, "_system");
+  }
+
+  pop(url,desc) {
+    this.modal.create(PopImagenPage,{url:url,des:desc});
+    //console.log("Pop");
+
+  }
 
 
 
   getAnexos(buscaraux) {
+
 
 
     return new Promise(resolve => {
