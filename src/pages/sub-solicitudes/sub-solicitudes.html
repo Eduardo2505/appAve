@@ -8,8 +8,8 @@
 
   <ion-navbar color="primary">
     <button ion-button menuToggle>
-           <ion-icon name="menu"></ion-icon>
-      </button>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Solicitudes</ion-title>
   </ion-navbar>
 
@@ -22,12 +22,12 @@
     ¿Qué deseas revisar?
   </div>
   <ion-card (click)="pedientes()">
-    <img src="http://tamalesdemama.com/dospng.png" />
+    <img src="{{imgPendiente}}" />
     <div class="card-title">PENDIENTES</div>
   </ion-card>
 
   <ion-card (click)="aprobados()">
-    <img src="http://tamalesdemama.com/unopng.png" />
+    <img src="{{imgAprobados}}" />
     <div class="card-title">APROBADOS</div>
 
   </ion-card>

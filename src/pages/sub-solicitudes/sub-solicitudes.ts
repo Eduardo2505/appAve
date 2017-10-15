@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams,Loading, LoadingController } from '
 
 import { SolicitudesPendientesPage } from '../solicitudes-pendientes/solicitudes-pendientes';
 import { SolicitudesAprobadasPage } from '../solicitudes-aprobadas/solicitudes-aprobadas';
+import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
 
 /**
  * Generated class for the SubSolicitudesPage page.
@@ -18,10 +19,17 @@ import { SolicitudesAprobadasPage } from '../solicitudes-aprobadas/solicitudes-a
 })
 export class SubSolicitudesPage {
   
+  public imgPendiente: string;
+  public imgAprobados: string;
+
   loading: Loading;
   constructor(public navCtrl: NavController, 
   public navParams: NavParams, 
-  public loadingCtrl: LoadingController ) {
+  public loadingCtrl: LoadingController ,
+  public varGlobal: VarGlobalesProvider) {
+
+    this.imgAprobados=varGlobal.imgAprobados;
+    this.imgPendiente=varGlobal.imgPendiente;
   }
 
   ionViewDidLoad() {

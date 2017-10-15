@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 import { TabsPage } from '../tabs/tabs';
-
+import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
 /**
  * Generated class for the LoginPage page.
  *
@@ -21,14 +21,16 @@ export class LoginPage {
   pass;
   nombre;
   idempleado;
+  public logo: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public auth: LoginServicioProvider,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private menu: MenuController) {
+    private menu: MenuController,
+    public varGlobal: VarGlobalesProvider) {
 
-
+      this.logo = varGlobal.logo;
   }
 
   loading: Loading;

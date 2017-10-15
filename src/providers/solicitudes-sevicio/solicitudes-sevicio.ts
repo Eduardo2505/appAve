@@ -214,6 +214,7 @@ export class SolicitudesSevicioProvider {
   comprobarcierre(idregistro, idestado_registro) {
     return new Promise<any>(
       resolve => {
+        //console.log(this.url + "/app/comprobarcierre?idregistro=" + idregistro + "&idestado_registro=" + idestado_registro);
         this.http.get(this.url + "/app/comprobarcierre?idregistro=" + idregistro + "&idestado_registro=" + idestado_registro)
           .map(res => res.json())
           .subscribe(

@@ -54,7 +54,7 @@
         </ion-col>
         <ion-col col-5>
           <h3>Costo:</h3>
-          <p>{{registro.costo| currency }}</p>
+          <p>{{registro.costo|currency:'USD':true }}</p>
         </ion-col>
       </ion-row>
 
@@ -79,24 +79,24 @@
 
     <ion-item>
       <h3>Ubicación:</h3>
-      <div col-12>{{registro.ubicacion}}</div>
+      <ion-card-header text-wrap><p>{{registro.ubicacion}}</p></ion-card-header>
     </ion-item>
 
     <!--Este es la parte de avaluo-->
     <ion-list-header>Avalúo</ion-list-header>
     <ion-item>
       <h3>Inspector:</h3>
-      <p>{{registro.Nombre}} {{registro.apellidos}}</p>
+      <p>{{registro.Nombre }} {{registro.apellidos}}</p>
     </ion-item>
     <ion-item>
       <ion-row>
         <ion-col col-6>
           <h3>Monto crédito:</h3>
-          <p>{{registro.monto_credito | currency}}</p>
+          <p>{{registro.monto_credito|currency:'USD':true}}</p>
         </ion-col>
         <ion-col col-5>
           <h3>Monto venta:</h3>
-          <p>{{registro.monto_venta| currency}}</p>
+          <p>{{registro.monto_venta|currency:'USD':true}}</p>
         </ion-col>
       </ion-row>
     </ion-item>

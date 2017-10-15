@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 import { AjustesPage } from '../../pages/ajustes/ajustes';
 import { PerfilPage } from '../../pages/perfil/perfil';
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
+import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
 
 
 import { LoginPage } from '../login/login';
@@ -23,9 +24,15 @@ export class MenuDesplegablePage {
   showError: any;
   @ViewChild('NAV') nav: Nav;
   public pages: Array<{ titulo: String, component: any, icon: string }>;
+  public logo: string;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: LoginServicioProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public auth: LoginServicioProvider, 
+    public varGlobal: VarGlobalesProvider) {
+
+    this.logo = varGlobal.logo;
 
     this.pages = [
       { titulo: 'Perfil', component: PerfilPage, icon: 'ios-contact' },
@@ -45,8 +52,8 @@ export class MenuDesplegablePage {
   salir() {
 
     this.auth.logout().subscribe(succ => {
-     // this.navCtrl.push(LoginPage);
-     this.navCtrl.setRoot(LoginPage);
+      // this.navCtrl.push(LoginPage);
+      this.navCtrl.setRoot(LoginPage);
 
 
     });

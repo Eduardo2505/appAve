@@ -35,6 +35,8 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { AnexosPage } from '../pages/anexos/anexos';
 import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable';
 import { LoginPage } from '../pages/login/login';
+//pipe
+import { CapitalizePipe  } from '../pipe/capitalize.pipe';
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { LoginPage } from '../pages/login/login';
     MenuDesplegablePage,
     AnexosPage,
     SolicitudesAprobadasPage,
-    LoginPage
+    LoginPage,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

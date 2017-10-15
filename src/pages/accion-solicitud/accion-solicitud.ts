@@ -73,7 +73,7 @@ export class AccionSolicitudPage {
     this.pet = "cerrar";
 
     this.todoform = this.formBuilder.group({
-      cantidad: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+$"), Validators.maxLength(5)])],
+      cantidad: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$"), Validators.maxLength(5)])],
       descripcion: ['', Validators.maxLength(400)],
     });
 
@@ -195,10 +195,10 @@ export class AccionSolicitudPage {
         if (data["mensaje"] == "1") {
           //se tiene que cerrar
           //console.log("falta cerrar");
-          this.estado = true;
+          this.estado = false;
         } else {
           // console.log("falta actualizar");
-          this.estado = false;
+          this.estado = true;
         }
       }
       )

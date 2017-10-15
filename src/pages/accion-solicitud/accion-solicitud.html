@@ -193,7 +193,7 @@
         <ion-item-sliding #item *ngFor="let i of pagos">
           <ion-item>
             <ion-icon name="checkmark-circle" item-left></ion-icon>
-            <h2>$ {{i.anticipo}} </h2>
+            <h2>{{i.anticipo|currency:'USD':true}} </h2>
             <p>{{i.descripcion}} </p>
             <p> {{i.registro}}</p>
           </ion-item>
@@ -205,7 +205,7 @@
       </ion-list>
 
 
-  TOTAL: $ {{sumita}} 
+  TOTAL:  {{sumita|currency:'USD':true}} 
     </ion-list>
 
   </div>
