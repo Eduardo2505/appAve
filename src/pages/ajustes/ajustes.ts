@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 /**
  * Generated class for the AjustesPage page.
  *
@@ -14,40 +16,52 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'ajustes.html',
 })
 export class AjustesPage {
-  private formPagos: any;
-  public recordVisitForm: todoform;
-  constructor(public navCtrl: NavController, 
-             public navParams: NavParams,
-             private viewCtrl: ViewController) {
- 
-              this.formPagos = [];
+
+  todo = {
+    pass1: '',
+    pass2: ''
+  };
+  public pass1: String;
+  public pass2: String;
+  public idempleado: number;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public aut: LoginServicioProvider,
+    private viewCtrl: ViewController) {
+
+    this.idempleado = aut.currentUser.idempleado;
+
   }
 
 
-  actualizar() {
-    console.log("Ya vamos ");
+  actualizar(form) {
 
-    // this.solicitudes.registraPago(this.formPagos, this.nombreUser, this.idempleado, this.IDregistro)
-    //   .then(
-    //   data => {
+    this.pass1 = form.value.pass1;
+    this.pass2 = form.value.pass2;
+    if (this.pass1 == this.pass2) {
 
-    //     if (data["mensaje"] == "1") {
+      this.aut.actualizarPass(this.idempleado,form)
+        .then(
+        data => {
 
-    //       this.showError("Se registro correctamente", "Aviso")
-    //       // this.navCtrl.push(InicioPage);
-    //       this.pagos = [];
-    //       this.todoform.reset();
-    //       this.getPagosUsuario();
+          if (data["mensaje"] == "1") {
 
-    //     }
-    //   }
-    //   )
-    //   .catch(
-    //   error => {
-    //     console.log(error);
-    //   }
-    //   )
+            this.showError("Se actualizo correctamente", "Aviso")
 
+
+          }
+        }
+        )
+        .catch(
+        error => {
+          console.log(error);
+        }
+        )
+
+    } else {
+      this.showError("Contraseñas no validas", "Error");
+    }
 
   }
 
@@ -58,6 +72,16 @@ export class AjustesPage {
   }
 
 
- 
+
+  showError(text, titulo) {
+    // this.loading.dismiss();
+
+    let alert = this.alertCtrl.create({
+      title: titulo,
+      subTitle: text,
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
 
 }

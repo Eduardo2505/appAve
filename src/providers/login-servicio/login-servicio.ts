@@ -33,6 +33,30 @@ export class LoginServicioProvider {
   }
 
 
+
+  public actualizarPass(id,dato) {
+    
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        var params = 'idempleado=' + id + '&passworduno=' + dato.value.pass2;
+        return new Promise(
+          resolve => {
+            this.http.post(this.url + "/app/actualizarPass", params, { headers: headers })
+              .map(res => res.json())
+              .subscribe(
+              data => {
+    
+                resolve(data);
+    
+              },
+              err => {
+                console.log(err);
+              }
+              )
+          }
+        );
+      }
+
   public postLogin(credentials) {
 
     var headers = new Headers();
