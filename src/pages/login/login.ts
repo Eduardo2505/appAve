@@ -45,9 +45,11 @@ export class LoginPage {
         if (resultado != 0) {
           this.nombre = data[0]["Nombre"] + " " + data[0]["apellidos"];
           this.idempleado = data[0]["idempleado"];
-          console.log("info >>>><" + this.idempleado);
+          //console.log("info >>>><" + this.idempleado);
 
-          this.auth.sesionUser(this.nombre, this.registerCredentials.email, this.idempleado).subscribe(allowed => {
+          this.auth.sesionUser(this.nombre, 
+                              this.registerCredentials.email, 
+                              this.idempleado).subscribe(allowed => {
             if (allowed) {
 
             //  this.auth.cargarStorage();

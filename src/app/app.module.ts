@@ -38,6 +38,7 @@ import { LoginPage } from '../pages/login/login';
 //pipe
 import { CapitalizePipe  } from '../pipe/capitalize.pipe';
 
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [

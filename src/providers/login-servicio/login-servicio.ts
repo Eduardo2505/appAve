@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { VarGlobalesProvider } from '../var-globales/var-globales';
 import { Platform } from 'ionic-angular'
-
+import { Storage } from '@ionic/storage';
 
 
 export class User {
@@ -27,7 +27,10 @@ export class LoginServicioProvider {
   // url = "http://adminave.pvessy.com/Ave";
 
 
-  constructor(public http: Http, public varGlobal: VarGlobalesProvider, private platform: Platform) {
+  constructor(public http: Http, 
+              public varGlobal: VarGlobalesProvider, 
+              private platform: Platform,
+            private storage:Storage) {
     this.url = varGlobal.ulr;
 
   }
@@ -102,27 +105,48 @@ export class LoginServicioProvider {
     });
   }
 
-  guardarStorage() {
+  guardarStorage(idempleado) {
     console.log("Entro a guardar");
     if (this.platform.is("cordova")) {
       // dispositiv
+      this.storage.set('idempleado',idempleado);
 
     } else {
-      //console.log(">>>>>>>>><"+JSON.stringify(this.currentUser));
-      localStorage.setItem("User", JSON.stringify(this.currentUser));
+      //computadora
+      localStorage.setItem('idempleado',idempleado);
 
     }
 
   }
+
   cargarStorage() {
-    console.log("Entro a guardar");
+
+//    console.log("Entro a guardar");
     if (this.platform.is("cordova")) {
       // dispositiv
+        this.storage.ready().then(()=>{
+
+          this.storage.get('idempleado')
+            .then((idempleado) => {
+
+              if(idempleado){
+                //Cargo
+              }
+              
+            
+          })
+        }
+
+
+);
+
+      
+    
 
     } else {
 
-      if (localStorage.getItem("User")) {
-        this.currentUser = JSON.parse(localStorage.getItem("User"));
+      if (localStorage.getItem("idempleado")) {
+           localStorage.getItem("idempleado")
 
       }
 
