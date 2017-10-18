@@ -13,7 +13,6 @@ import { HttpModule } from '@angular/http';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 //Son externos
@@ -37,8 +36,7 @@ import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable'
 import { LoginPage } from '../pages/login/login';
 //pipe
 import { CapitalizePipe  } from '../pipe/capitalize.pipe';
-
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -61,7 +59,8 @@ import { Storage } from '@ionic/storage';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

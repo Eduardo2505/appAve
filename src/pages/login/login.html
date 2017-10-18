@@ -33,13 +33,13 @@
           <ion-list inset>
 
             <ion-item>
-              <ion-label>Usuario</ion-label>
-              <ion-input type="text" name="email"  [(ngModel)]="registerCredentials.email" required ></ion-input>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-label>Contraseña</ion-label>
-              <ion-input type="password" name="password" [(ngModel)]="registerCredentials.password" required ></ion-input>
+              <ion-input type="password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>
 
           </ion-list>
@@ -48,8 +48,8 @@
 
       <ion-row>
         <ion-col>
-          <!--<button ion-button class="login-button" [disabled]="!registerForm.form.valid" >Entrar</button>-->
-           <button ion-button class="login-button" >Entrar</button>
+          <button ion-button class="login-button" [disabled]="!registerForm.form.valid" >Entrar</button>
+         
         </ion-col>
       </ion-row>
     </form>

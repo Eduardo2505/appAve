@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, MenuController, ViewController } from 'ionic-angular';
 
 
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
@@ -28,9 +28,19 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private menu: MenuController,
-    public varGlobal: VarGlobalesProvider) {
+    public varGlobal: VarGlobalesProvider,
+    private viewCtrl: ViewController) {
 
-      this.logo = varGlobal.logo;
+
+    auth.cargarStorage();
+    let valor: boolean = auth.banderaStronge;
+
+    if (valor) {
+
+
+      this.navCtrl.push(TabsPage);
+    }
+    this.logo = varGlobal.logo;
   }
 
   loading: Loading;
@@ -47,34 +57,36 @@ export class LoginPage {
           this.idempleado = data[0]["idempleado"];
           //console.log("info >>>><" + this.idempleado);
 
-          this.auth.sesionUser(this.nombre, 
-                              this.registerCredentials.email, 
-                              this.idempleado).subscribe(allowed => {
-            if (allowed) {
 
-            //  this.auth.cargarStorage();
-              this.navCtrl.push(TabsPage);
-             
-            }
-          },
+
+          this.auth.sesionUser(this.nombre,
+            this.registerCredentials.email,
+            this.idempleado).subscribe(allowed => {
+              if (allowed) {
+
+                //  this.auth.cargarStorage();
+                this.navCtrl.push(TabsPage);
+
+              }
+            },
             error => {
-             
+
               this.showError(error);
-            
+
             });
 
 
 
 
         } else {
-          this.showError("Access Denied");
+          this.showError("No existe el usuario");
         }
 
       }
       )
       .catch(
       error => {
-        console.log("Erro "+error);
+       
         this.showError(error);
       }
       )
@@ -96,11 +108,11 @@ export class LoginPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
   ionViewDidLoad() {
-    //console.log('inicio esta Login');
+   
   }
 
 }

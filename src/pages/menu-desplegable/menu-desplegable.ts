@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Nav, ViewController, Platform, App } from 'ionic-angular';
 
 import { AjustesPage } from '../../pages/ajustes/ajustes';
 import { PerfilPage } from '../../pages/perfil/perfil';
@@ -21,18 +21,22 @@ import { LoginPage } from '../login/login';
   templateUrl: 'menu-desplegable.html',
 })
 export class MenuDesplegablePage {
-  showError: any;
-  @ViewChild('NAV') nav: Nav;
+
   public pages: Array<{ titulo: String, component: any, icon: string }>;
   public logo: string;
+  public rootPage: any;
 
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public auth: LoginServicioProvider, 
-    public varGlobal: VarGlobalesProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public auth: LoginServicioProvider,
+    public varGlobal: VarGlobalesProvider,
+    public viewCtrl: ViewController,
+    public platform: Platform,
+    public app: App) {
 
     this.logo = varGlobal.logo;
+    console.log("<<<<<<<<<<<<<<< Entro al nmenu de  del usuario>>>>>>>>>>>>");
 
     this.pages = [
       { titulo: 'Perfil', component: PerfilPage, icon: 'ios-contact' },
@@ -41,19 +45,21 @@ export class MenuDesplegablePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuDesplegablePage');
+    
   }
 
   goToPage(page) {
-    //  this.nav.setRoot(page);
+  
     this.navCtrl.push(page);
 
   }
   salir() {
-
+    console.log("Salio el usuario");
     this.auth.logout().subscribe(succ => {
-      // this.navCtrl.push(LoginPage);
-      this.navCtrl.setRoot(LoginPage);
+   
+      const root = this.app.getRootNav();
+      root.popToRoot();
+      root.setRoot(LoginPage);
 
 
     });

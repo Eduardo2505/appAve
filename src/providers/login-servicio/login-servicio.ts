@@ -18,55 +18,60 @@ export class User {
     this.idempleado = idempleado;
   }
 }
+
+
 @Injectable()
 export class LoginServicioProvider {
 
   currentUser: User;
 
   public url: string;
-  // url = "http://adminave.pvessy.com/Ave";
+  public nameStringe: string;
+  public emailStringe: string;
+  public idempleadoStringe: string;
+  public banderaStronge: boolean = false;
 
 
-  constructor(public http: Http, 
-              public varGlobal: VarGlobalesProvider, 
-              private platform: Platform,
-            private storage:Storage) {
+  constructor(public http: Http,
+    public varGlobal: VarGlobalesProvider,
+    private platform: Platform,
+    private storage: Storage) {
     this.url = varGlobal.ulr;
 
   }
 
 
 
-  public actualizarPass(id,dato) {
-    
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        var params = 'idempleado=' + id + '&passworduno=' + dato.value.pass2;
-        return new Promise(
-          resolve => {
-            this.http.post(this.url + "/app/actualizarPass", params, { headers: headers })
-              .map(res => res.json())
-              .subscribe(
-              data => {
-    
-                resolve(data);
-    
-              },
-              err => {
-                console.log(err);
-              }
-              )
+  public actualizarPass(id, dato) {
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    var params = 'idempleado=' + id + '&passworduno=' + dato.value.pass2;
+    return new Promise(
+      resolve => {
+        this.http.post(this.url + "/app/actualizarPass", params, { headers: headers })
+          .map(res => res.json())
+          .subscribe(
+          data => {
+
+            resolve(data);
+
+          },
+          err => {
+            console.log(err);
           }
-        );
+          )
       }
+    );
+  }
 
   public postLogin(credentials) {
 
     var headers = new Headers();
 
     headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    //   var params = 'email=' + credentials.email + '&password=' + credentials.password;
-    var params = 'email=beto.soren@gmail.com&password=123';
+      var params = 'email=' + credentials.email + '&password=' + credentials.password;
+    
 
     return new Promise(
       resolve => {
@@ -86,7 +91,15 @@ export class LoginServicioProvider {
     );
   }
 
+
+  public sesionUserStronge(usuario, email, idempleado) {
+  
+    this.currentUser = new User(usuario, email, idempleado);
+
+  }
   public sesionUser(usuario, email, idempleado) {
+
+    this.guardarStorage(usuario, email, idempleado);
     return Observable.create(observer => {
       let access = true;
       this.currentUser = new User(usuario, email, idempleado);
@@ -95,60 +108,140 @@ export class LoginServicioProvider {
     });
 
 
+
   }
 
   public logout() {
+
+
     return Observable.create(observer => {
       this.currentUser = null;
       observer.next(true);
       observer.complete();
+      this.remover();
     });
   }
 
-  guardarStorage(idempleado) {
-    console.log("Entro a guardar");
-    if (this.platform.is("cordova")) {
-      // dispositiv
-      this.storage.set('idempleado',idempleado);
+  remover() {
 
+
+    if (this.platform.is("cordova")) {
+
+      this.storage.remove('usuario');
+      this.storage.remove('email');
+      this.storage.remove('idempleado');
     } else {
-      //computadora
-      localStorage.setItem('idempleado',idempleado);
+
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('email');
+      localStorage.removeItem('idempleado');
+
+    }
+    this.banderaStronge = false;
+
+  }
+
+  guardarStorage(usuario, email, idempleado) {
+
+
+    if (this.platform.is("cordova")) {
+
+      this.storage.set('usuario', usuario);
+      this.storage.set('email', email);
+      this.storage.set('idempleado', idempleado);
+    } else {
+
+      console.log("Entro a guardar Storige");
+
+      localStorage.setItem('usuario', usuario);
+      localStorage.setItem('email', email);
+      localStorage.setItem('idempleado', idempleado);
 
     }
 
   }
 
+
   cargarStorage() {
 
-//    console.log("Entro a guardar");
     if (this.platform.is("cordova")) {
-      // dispositiv
-        this.storage.ready().then(()=>{
 
+      this.storage.ready()
+        .then(() => {
           this.storage.get('idempleado')
             .then((idempleado) => {
-
-              if(idempleado){
-                //Cargo
+              if (idempleado) {
+                this.idempleadoStringe = idempleado;
               }
-              
-            
-          })
-        }
+            });
+
+          this.storage.get('usuario')
+            .then((usuario) => {
+              if (usuario) {
+                this.nameStringe = usuario;
+              }
+            });
+
+          this.storage.get('email')
+            .then((email) => {
+              if (email) {
+                this.emailStringe = email;
+              }
+            });
+          // Sirve para comprobar
+          this.storage.get('idempleado')
+            .then((idempleado) => {
+              if (idempleado) {
+
+        
+                this.banderaStronge = true;
+                this.sesionUserStronge(this.nameStringe, this.emailStringe, this.idempleadoStringe);
+
+              } else {
+                this.remover();
+
+              }
+            });
 
 
-);
 
-      
-    
+
+        });
+
+
+
 
     } else {
 
+
+
       if (localStorage.getItem("idempleado")) {
-           localStorage.getItem("idempleado")
+
+        this.idempleadoStringe = localStorage.getItem("idempleado");
 
       }
+      if (localStorage.getItem("usuario")) {
+
+        this.nameStringe = localStorage.getItem("usuario");
+
+      }
+
+      if (localStorage.getItem("email")) {
+
+        this.emailStringe = localStorage.getItem("email");
+
+      }
+
+      if (localStorage.getItem("idempleado")) {
+
+        this.banderaStronge = true;
+        this.sesionUserStronge(this.nameStringe, this.emailStringe, this.idempleadoStringe);
+      } else {
+
+        this.remover();
+      }
+
+
 
     }
 

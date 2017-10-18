@@ -27,7 +27,6 @@ export class InicioPage {
     public solicitudes: SolicitudesSevicioProvider,
     public authx: LoginServicioProvider,
     private viewCtrl: ViewController) {
-
     this.initializeItems();
     this.idempleado = authx.currentUser.idempleado;
     this.offset = 0;
