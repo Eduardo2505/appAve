@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingC
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {PopImagenPage} from '../pop-imagen/pop-imagen';

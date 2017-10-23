@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+//import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 /**

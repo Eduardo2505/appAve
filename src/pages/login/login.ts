@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading, MenuController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading} from 'ionic-angular';
 
 
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
@@ -27,9 +27,7 @@ export class LoginPage {
     public auth: LoginServicioProvider,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private menu: MenuController,
-    public varGlobal: VarGlobalesProvider,
-    private viewCtrl: ViewController) {
+    public varGlobal: VarGlobalesProvider) {
 
 
     auth.cargarStorage();
@@ -48,6 +46,9 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
+
+   
+    
     this.auth.postLogin(this.registerCredentials)
       .then(
       data => {
@@ -55,18 +56,11 @@ export class LoginPage {
         if (resultado != 0) {
           this.nombre = data[0]["Nombre"] + " " + data[0]["apellidos"];
           this.idempleado = data[0]["idempleado"];
-          //console.log("info >>>><" + this.idempleado);
-
-
-
           this.auth.sesionUser(this.nombre,
             this.registerCredentials.email,
             this.idempleado).subscribe(allowed => {
               if (allowed) {
-
-                //  this.auth.cargarStorage();
                 this.navCtrl.push(TabsPage);
-
               }
             },
             error => {
@@ -90,6 +84,7 @@ export class LoginPage {
         this.showError(error);
       }
       )
+      
   }
 
   showLoading() {

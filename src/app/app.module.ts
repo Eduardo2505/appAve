@@ -10,8 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 /* ================= Modulos ======================== */
 import { HttpModule } from '@angular/http';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 

@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav, ViewController, Platform, App } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, Platform, App } from 'ionic-angular';
 
 import { AjustesPage } from '../../pages/ajustes/ajustes';
 import { PerfilPage } from '../../pages/perfil/perfil';

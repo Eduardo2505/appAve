@@ -104,9 +104,6 @@ export class SolicitudesSevicioProvider {
 
 
   getSolicitudesInicio(idempleado, buscar, offset) {
-
-
-    // console.log(this.url + "/app/solicitudesInicio?idempleado=" + idempleado + "&buscar=" + buscar + "&offset=" + offset);
     return new Promise<any>(
 
       resolve => {

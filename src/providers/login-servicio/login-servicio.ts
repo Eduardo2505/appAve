@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { VarGlobalesProvider } from '../var-globales/var-globales';
@@ -44,12 +44,14 @@ export class LoginServicioProvider {
 
   public actualizarPass(id, dato) {
 
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    var params = 'idempleado=' + id + '&passworduno=' + dato.value.pass2;
+    let data = new URLSearchParams();
+    data.append("idempleado", id);
+    data.append("passworduno", dato.value.pass2);
+    let url = this.url + '/app/actualizarPass'
+
     return new Promise(
       resolve => {
-        this.http.post(this.url + "/app/actualizarPass", params, { headers: headers })
+        this.http.post(url,data)
           .map(res => res.json())
           .subscribe(
           data => {
@@ -67,21 +69,17 @@ export class LoginServicioProvider {
 
   public postLogin(credentials) {
 
-    var headers = new Headers();
-
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-      var params = 'email=' + credentials.email + '&password=' + credentials.password;
-    
-
+    let data = new URLSearchParams();
+    data.append("email", credentials.email);
+    data.append("password", credentials.password);
+    let url = this.url + '/app/login';
     return new Promise(
       resolve => {
-        this.http.post(this.url + "/app/login", params, { headers: headers })
+        this.http.post(url, data)
           .map(res => res.json())
           .subscribe(
           data => {
-
             resolve(data);
-
           },
           err => {
             console.log(err);
@@ -93,7 +91,7 @@ export class LoginServicioProvider {
 
 
   public sesionUserStronge(usuario, email, idempleado) {
-  
+
     this.currentUser = new User(usuario, email, idempleado);
 
   }
@@ -193,7 +191,7 @@ export class LoginServicioProvider {
             .then((idempleado) => {
               if (idempleado) {
 
-        
+
                 this.banderaStronge = true;
                 this.sesionUserStronge(this.nameStringe, this.emailStringe, this.idempleadoStringe);
 
