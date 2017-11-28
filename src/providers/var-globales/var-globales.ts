@@ -11,9 +11,11 @@ export class VarGlobalesProvider {
   public imgAprobados: string;
   public logo: string;
   public imgPerfil: string;
+  public ulrUplad: string;
   constructor(public http: Http) {
     //this.ulr = "http://127.0.0.1/Avedesa";
     this.ulr="http://desa.pvessy.com/Avedesa";
+    this.ulrUplad="http://adminave.pvessy.com/ionic/upload.php";
     this.imgAprobados=this.ulr+"/imgApp/unopng.png";
     this.imgPendiente=this.ulr+"/imgApp/dospng.png";
     this.logo=this.ulr+"/imgApp/logo.png";

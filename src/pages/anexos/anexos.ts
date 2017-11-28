@@ -8,6 +8,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {PopImagenPage} from '../pop-imagen/pop-imagen';
+import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,7 @@ export class AnexosPage {
   public buscar: string;
   private nombreArchivo: string;
   private folio: string;
+  public url: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,7 +35,8 @@ export class AnexosPage {
     public loadingCtrl: LoadingController,
     private transfer: FileTransfer,
     private iab: InAppBrowser,
-    private modal:ModalController) {
+    private modal:ModalController,
+    public varGlobal: VarGlobalesProvider) {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
@@ -41,6 +44,7 @@ export class AnexosPage {
     console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
+    this.url = varGlobal.ulrUplad;
   }
   //falta Subir Anexos
   ionViewDidLoad() {
@@ -53,7 +57,7 @@ export class AnexosPage {
 
     let options = {
       quality: 25,
-      maximumImagesCount: 10
+      maximumImagesCount: 5
     };
 
     this.imagePicker.getPictures(options).then((results) => {
@@ -79,7 +83,7 @@ export class AnexosPage {
 
         }
 
-        fileTransfer.upload(results[i], 'http://adminave.pvessy.com/ionic/upload.php', options1)
+        fileTransfer.upload(results[i], this.url, options1)
           .then((data) => {
             // success
             loading.dismiss();
@@ -93,6 +97,8 @@ export class AnexosPage {
 
 
       }
+
+
     }, (err) => { });
 
   }
