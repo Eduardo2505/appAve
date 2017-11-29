@@ -43,6 +43,8 @@ export class AnexosPage {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
+    console.log("tipo: " + this.tipo);
+    console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
@@ -88,7 +90,7 @@ export class AnexosPage {
         fileTransfer.upload(results[i], this.url, options1)
           .then((data) => {
 
-            this.solicitudes.registraAnexo(this.tipo, this.nombreArchivo, this.idempleado, this.IDregistro)
+            /*this.solicitudes.registraAnexo(this.tipo, this.nombreArchivo, this.idempleado, this.IDregistro)
               .then(
               data => {
                 if (data["mensaje"] == "1") {
@@ -99,7 +101,7 @@ export class AnexosPage {
               }).catch(
               error => {
                 console.log(error);
-              })
+              })*/
 
           }, (err) => {
             // error
@@ -110,7 +112,7 @@ export class AnexosPage {
 
       }
      
-      this.getAnexos("");
+
 
     }, (err) => { });
 
