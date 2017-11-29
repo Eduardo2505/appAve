@@ -43,8 +43,6 @@ export class AnexosPage {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
-    console.log("tipo: " + this.tipo);
-    console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
@@ -71,7 +69,7 @@ export class AnexosPage {
 
       loading.present();
       for (var i = 0; i < results.length; i++) {
-        loading.present();
+       
 
         const fileTransfer: FileTransferObject = this.transfer.create();
         var f = new Date();
@@ -108,11 +106,11 @@ export class AnexosPage {
             alert("error" + JSON.stringify(err));
           });
 
-
+         
 
       }
-      loading.dismiss();
-
+     
+      this.getAnexos("");
 
     }, (err) => { });
 

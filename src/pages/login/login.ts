@@ -46,8 +46,8 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
+    
 
-   
     
     this.auth.postLogin(this.registerCredentials)
       .then(
@@ -86,6 +86,7 @@ export class LoginPage {
       )
       
   }
+  
 
   showLoading() {
     this.loading = this.loadingCtrl.create({

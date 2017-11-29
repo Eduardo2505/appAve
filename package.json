@@ -30,7 +30,6 @@
     "@ionic-native/status-bar": "4.3.0",
     "@ionic/storage": "^2.0.1",
     "com.synconset.imagepicker": "^2.1.10",
-    "cordova-ios": "4.5.4",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-file": "^4.3.3",
@@ -72,8 +71,6 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {}
     },
-    "platforms": [
-      "ios"
-    ]
+    "platforms": []
   }
 }
