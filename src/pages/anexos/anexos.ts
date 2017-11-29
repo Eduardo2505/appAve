@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController,ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController, ModalController } from 'ionic-angular';
 
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
 
@@ -7,8 +7,9 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 //import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import {PopImagenPage} from '../pop-imagen/pop-imagen';
+import { PopImagenPage } from '../pop-imagen/pop-imagen';
 import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
+import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,7 @@ export class AnexosPage {
   private nombreArchivo: string;
   private folio: string;
   public url: string;
+  public idempleado: number;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,7 +37,8 @@ export class AnexosPage {
     public loadingCtrl: LoadingController,
     private transfer: FileTransfer,
     private iab: InAppBrowser,
-    private modal:ModalController,
+    private modal: ModalController,
+    public authx: LoginServicioProvider,
     public varGlobal: VarGlobalesProvider) {
 
     this.IDregistro = this.navParams.get('IDregistro');
@@ -45,6 +48,7 @@ export class AnexosPage {
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
+    this.idempleado = authx.currentUser.idempleado;
   }
   //falta Subir Anexos
   ionViewDidLoad() {
@@ -67,13 +71,13 @@ export class AnexosPage {
 
       loading.present();
       for (var i = 0; i < results.length; i++) {
-        //console.log('Image URI: ' + results[i]);
+        loading.present();
 
         const fileTransfer: FileTransferObject = this.transfer.create();
         var f = new Date();
         this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
 
-        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro;
+        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro + ".jpg";
 
 
         let options1: FileUploadOptions = {
@@ -85,9 +89,19 @@ export class AnexosPage {
 
         fileTransfer.upload(results[i], this.url, options1)
           .then((data) => {
-            // success
-            loading.dismiss();
-            // alert("Se subio");
+
+            this.solicitudes.registraAnexo(this.tipo, this.nombreArchivo, this.idempleado, this.IDregistro)
+              .then(
+              data => {
+                if (data["mensaje"] == "1") {
+                  console.log("Subio la subir Imagen");
+                } else {
+                  console.log("Error al subir Imagen");
+                }
+              }).catch(
+              error => {
+                console.log(error);
+              })
 
           }, (err) => {
             // error
@@ -97,6 +111,7 @@ export class AnexosPage {
 
 
       }
+      loading.dismiss();
 
 
     }, (err) => { });
@@ -110,8 +125,8 @@ export class AnexosPage {
     const browser = this.iab.create(url, "_system");
   }
 
-  pop(url,desc) {
-    this.modal.create(PopImagenPage,{url:url,des:desc});
+  pop(url, desc) {
+    this.modal.create(PopImagenPage, { url: url, des: desc });
     //console.log("Pop");
 
   }

@@ -107,7 +107,7 @@ export class AccionSolicitudPage {
 
                 if (data["mensaje"] == "1") {
 
-                  this.showError("Se elimino correctamente", "Aviso")
+                 // this.showError("Se elimino correctamente", "Aviso")
                   // this.navCtrl.push(InicioPage);
                   this.pagos = [];
                   this.todoform.reset();
@@ -287,7 +287,7 @@ export class AccionSolicitudPage {
       subTitle: text,
       buttons: ['Aceptar']
     });
-    alert.present(prompt);
+    alert.present();
   }
 
 

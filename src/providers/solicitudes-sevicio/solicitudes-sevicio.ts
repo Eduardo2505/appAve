@@ -14,10 +14,12 @@ import { VarGlobalesProvider } from '../var-globales/var-globales';
 export class SolicitudesSevicioProvider {
 
   private url: string;
-  // url = "http://adminave.pvessy.com/Ave";
-
+  private headers :Headers;
   constructor(public http: Http, public varGlobal: VarGlobalesProvider) {
-    this.url = varGlobal.ulr;
+  this.url = varGlobal.ulr;
+  this.headers = new Headers();
+  this.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  
 
   }
 
@@ -226,7 +228,7 @@ export class SolicitudesSevicioProvider {
     );
   }
   comprobarIncial(idregistro, idestado_registro) {
-    // console.log(this.url + "/app/comprobarIncial?idregistro=" + idregistro+"&idestado_registro="+idestado_registro);
+   
     return new Promise<any>(
       resolve => {
         this.http.get(this.url + "/app/comprobarIncial?idregistro=" + idregistro + "&idestado_registro=" + idestado_registro)
@@ -244,7 +246,7 @@ export class SolicitudesSevicioProvider {
   }
 
   getPagosUsuario(idempleado, idregistro) {
-    // console.log(this.url + "/app/getPagosUsuario?idempleado=" + idempleado+"&idregistro="+idregistro);
+    
     return new Promise<any>(
       resolve => {
         this.http.get(this.url + "/app/getPagosUsuario?idempleado=" + idempleado + "&idregistro=" + idregistro)
@@ -263,16 +265,16 @@ export class SolicitudesSevicioProvider {
 
 
   public registraPago(formPagos, usuario, idempleado, idregistro) {
-
-    var headers = new Headers();
-
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    var params = 'usuario=' + usuario + '&anticipo=' + formPagos.cantidad + '&descripcion=' + formPagos.descripcion + '&idempleado=' + idempleado + '&idregistro=' + idregistro;
+    var params = 'usuario=' + usuario 
+                + '&anticipo=' + formPagos.cantidad 
+                + '&descripcion=' + formPagos.descripcion 
+                + '&idempleado=' + idempleado 
+                + '&idregistro=' + idregistro;
+   let url = this.url + '/app/registroPago';
    
-
     return new Promise(
       resolve => {
-        this.http.post(this.url + "/app/registroPago", params, { headers: headers })
+        this.http.post(url, params, { headers: this.headers })
           .map(res => res.json())
           .subscribe(
           data => {
@@ -287,15 +289,39 @@ export class SolicitudesSevicioProvider {
   }
 
     eliminarPago(idregistro, idpagos,usuario) {
-    var headers = new Headers();
-
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    var params = 'idregistro=' + idregistro + "&idpagos=" + idpagos+"&usuario="+usuario;
+   
+    var params = 'idregistro=' + idregistro 
+                + "&idpagos=" + idpagos
+                +"&usuario="+usuario;
    
 
     return new Promise<any>(
       resolve => {
-       this.http.post(this.url + "/app/eliminarPago", params, { headers: headers })
+       this.http.post(this.url + "/app/eliminarPago", params, { headers: this.headers })
+          .map(res => res.json())
+          .subscribe(
+          data => {
+            resolve(data);
+          },
+          err => {
+            console.log(err);
+          }
+          )
+      }
+    );
+  }
+
+
+  public registraAnexo(tipo, archivo, idempleado, idregistro) {
+    var params = 'tipo=' + tipo 
+                + '&archivo=' + archivo 
+                + '&idempleado=' + idempleado 
+                + '&idregistro=' + idregistro;
+   let url = this.url + '/app/insetarimg?'+params;
+   
+    return new Promise(
+      resolve => {
+        this.http.get(url)
           .map(res => res.json())
           .subscribe(
           data => {

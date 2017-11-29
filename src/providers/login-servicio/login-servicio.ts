@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Http, URLSearchParams ,Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { VarGlobalesProvider } from '../var-globales/var-globales';
@@ -43,15 +43,15 @@ export class LoginServicioProvider {
 
 
   public actualizarPass(id, dato) {
-
-    let data = new URLSearchParams();
-    data.append("idempleado", id);
-    data.append("passworduno", dato.value.pass2);
-    let url = this.url + '/app/actualizarPass'
+   
+    let datax = new URLSearchParams();
+    datax.append("idempleado", id);
+    datax.append("passworduno", dato.value.pass2);
+    let url = this.url + '/app/actualizarPass';
 
     return new Promise(
       resolve => {
-        this.http.post(url,data)
+        this.http.post(url,datax)
           .map(res => res.json())
           .subscribe(
           data => {
@@ -69,13 +69,18 @@ export class LoginServicioProvider {
 
   public postLogin(credentials) {
 
-    let data = new URLSearchParams();
-    data.append("email", credentials.email);
-    data.append("password", credentials.password);
+    
+
+    var params = 'email=' + credentials.email 
+    + '&password=' + credentials.password;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
     let url = this.url + '/app/login';
     return new Promise(
       resolve => {
-        this.http.post(url, data)
+        this.http.post(url,params, { headers:headers })
           .map(res => res.json())
           .subscribe(
           data => {

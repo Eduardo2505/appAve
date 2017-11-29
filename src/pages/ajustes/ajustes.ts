@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
 //import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { InicioPage } from '../../pages/inicio/inicio';
 
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 /**
@@ -47,7 +48,8 @@ export class AjustesPage {
 
           if (data["mensaje"] == "1") {
 
-            this.showError("Se actualizo correctamente", "Aviso")
+            this.showError("Se actualizo correctamente", "Aviso");
+            this.navCtrl.push(InicioPage);
 
 
           }
