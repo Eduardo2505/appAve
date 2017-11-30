@@ -7,3 +7,11 @@ export class CapitalizePipe implements PipeTransform {
         return message;
       }
 }
+
+@Pipe({name: 'fechalarga'})
+export class FechaLarga implements PipeTransform {
+    transform(value: string): string {
+        let message = "Welcome to " + value;
+        return message;
+      }
+}

@@ -29,6 +29,7 @@
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",
     "@ionic/storage": "^2.0.1",
+    "angular-i18n": "^1.6.7",
     "com.synconset.imagepicker": "^2.1.10",
     "cordova-ios": "4.5.4",
     "cordova-plugin-compat": "^1.2.0",

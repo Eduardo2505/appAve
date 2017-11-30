@@ -43,7 +43,7 @@
       </ion-item>
       <ion-item>
         <ion-icon color="subtle" large item-start name='ios-clock-outline'></ion-icon>
-        <h2> {{i.fecha_de_inspeccion}}</h2>
+        <h2> {{i.fecha_de_inspeccion| date:'fullDate'}}</h2>
         <p>{{i.hora_de_inspeccion}} hrs</p>
       </ion-item>
       <ion-item actions>
