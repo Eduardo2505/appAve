@@ -131,10 +131,8 @@ export class AnexosPage {
       this.solicitudes.getAnexos(this.IDregistro, buscaraux, this.tipo, this.offset)
         .then(data => {
           
-
-          for (let person of data) {
-            this.registros.push(person);
-          }
+          this.registros=data;
+        
           resolve(true);
 
         });
