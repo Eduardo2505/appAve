@@ -33,7 +33,7 @@
           </button>
         </ion-fab>
       </div>
-      <ion-item>
+      <ion-item (click)="detalles(i.idregistro,i.idestado_empleado)">
           <ion-icon name="ios-folder-open" color="subtle" large item-start></ion-icon>
 
   
@@ -41,9 +41,9 @@
         <h2 *ngIf= "i.num_expediente == ''" > S/N</h2>
       
       </ion-item>
-      <ion-item>
+      <ion-item (click)="detalles(i.idregistro,i.idestado_empleado)">
         <ion-icon color="subtle" large item-start name='ios-clock-outline'></ion-icon>
-        <h2> {{i.fecha_de_inspeccion| date:'fullDate'}}</h2>
+        <h2> {{i.fecha_de_inspeccion|fechalarga}}</h2>
         <p>{{i.hora_de_inspeccion}} hrs</p>
       </ion-item>
       <ion-item actions>

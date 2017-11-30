@@ -34,7 +34,6 @@ import { AnexosPage } from '../pages/anexos/anexos';
 import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable';
 import { LoginPage } from '../pages/login/login';
 //pipe
-import { CapitalizePipe  } from '../pipe/capitalize.pipe';
 import { FechaLarga  } from '../pipe/capitalize.pipe';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -54,7 +53,6 @@ import { IonicStorageModule } from '@ionic/storage';
     AnexosPage,
     SolicitudesAprobadasPage,
     LoginPage,
-    CapitalizePipe,
     FechaLarga
   ],
   imports: [
