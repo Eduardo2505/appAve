@@ -18,6 +18,7 @@ import { AccionSolicitudPage } from '../../pages/accion-solicitud/accion-solicit
 export class DetallesPage {
 
   private IDregistro: number;
+  private idestado_empleado: number;
   private registro: any;
  // private fechagaregistro: any;
   private FechaVisita: string;
@@ -37,14 +38,24 @@ export class DetallesPage {
     public solicitudes: SolicitudesSevicioProvider) {
     this.registro = [];
     this.IDregistro = this.navParams.get('IDregistro');
+    this.idestado_empleado = this.navParams.get('idestado_empleado');
     this.detalles();
     this.detallesFechas();
   }
 
   acciones() {
+
+   /*  console.log("IDRegistro "+this.IDregistro);
+    console.log("estado "+this.registro.estado);
+    console.log("idestado_empleado "+this.idestado_empleado);
+    console.log("pantalla 1");
+    console.log("idestado_registro "+this.registro.idestado_registro);
+    console.log("tipoSolicitud 0"); */
+
+
     this.navCtrl.push(AccionSolicitudPage, { IDregistro:this.IDregistro,
       estado: this.registro.estado,
-      idestado_empleado: 123,//esto si se debe de modificr
+      idestado_empleado: this.idestado_empleado,
       pantalla: 1,
       idestado_registro:this.registro.idestado_registro,
       tipoSolicitud:0});

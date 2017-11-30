@@ -87,7 +87,15 @@ export class InicioPage {
 
   acciones(IDregistro,estado,idestado_empleado,pantalla,idestado_registro) {
 
-    console.log(IDregistro+" estado  "+estado+" id estadoEmple- "+idestado_empleado+" pantalla  "+pantalla+" idestado_registro "+idestado_registro)
+
+    /* console.log("IDRegistro "+IDregistro);
+    console.log("estado "+estado);
+    console.log("idestado_empleado "+idestado_empleado);
+    console.log("pantalla "+pantalla);
+    console.log("idestado_registro "+idestado_registro);
+    console.log("tipoSolicitud 0"); */
+
+   
     this.navCtrl.push(AccionSolicitudPage, { IDregistro: IDregistro,
       estado: estado,
       idestado_empleado: idestado_empleado,
@@ -95,8 +103,8 @@ export class InicioPage {
       idestado_registro:idestado_registro,
       tipoSolicitud:0});
   }
-  detalles(IDregistro) {
-    this.navCtrl.push(DetallesPage, { IDregistro: IDregistro });
+  detalles(IDregistro,idestado_empleado) {
+    this.navCtrl.push(DetallesPage, { IDregistro: IDregistro, idestado_empleado:idestado_empleado});
   }
 
  

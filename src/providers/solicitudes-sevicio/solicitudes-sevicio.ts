@@ -26,7 +26,7 @@ export class SolicitudesSevicioProvider {
    getAnexos(idregistro, buscar, tipo,offset) {
 
 
-
+//console.log(this.url + "/app/mostraAnexos?idregistro=" + idregistro + "&buscar=" + buscar + "&offset=" + offset+"&tipo="+tipo);
     return new Promise<any>(
 
       resolve => {

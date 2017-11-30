@@ -42,8 +42,6 @@ export class AnexosPage {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
-    console.log("tipo: " + this.tipo);
-    console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
@@ -129,16 +127,14 @@ export class AnexosPage {
 
 
   getAnexos(buscaraux) {
-
-
-
     return new Promise(resolve => {
-
       this.solicitudes.getAnexos(this.IDregistro, buscaraux, this.tipo, this.offset)
         .then(data => {
-          this.registros = data;
-          console.log(data);
+          
 
+          for (let person of data) {
+            this.registros.push(person);
+          }
           resolve(true);
 
         });
