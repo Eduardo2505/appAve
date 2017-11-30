@@ -4,6 +4,7 @@ import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/
 import { LoginServicioProvider } from '../../providers/login-servicio/login-servicio';
 import { AccionSolicitudPage } from '../../pages/accion-solicitud/accion-solicitud';
 import { DetallesPage } from '../../pages/detalles/detalles';
+import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
 
 
 
@@ -22,16 +23,20 @@ export class InicioPage {
   public idempleado: number;
   public offset: number = 0;
   public registros: any = [];
+  public imgmp: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public solicitudes: SolicitudesSevicioProvider,
     public authx: LoginServicioProvider,
+    public varGlobal: VarGlobalesProvider,
     private viewCtrl: ViewController) {
       
     this.initializeItems();
     this.idempleado = authx.currentUser.idempleado;
     this.offset = 0;
     this.loadPeople(this.idempleado, "");
+    this.imgmp=varGlobal.imgmp;
+   
   }
 
   loadPeople(idEmpleado, buscar) {
@@ -81,6 +86,8 @@ export class InicioPage {
   }
 
   acciones(IDregistro,estado,idestado_empleado,pantalla,idestado_registro) {
+
+    console.log(IDregistro+" estado  "+estado+" id estadoEmple- "+idestado_empleado+" pantalla  "+pantalla+" idestado_registro "+idestado_registro)
     this.navCtrl.push(AccionSolicitudPage, { IDregistro: IDregistro,
       estado: estado,
       idestado_empleado: idestado_empleado,

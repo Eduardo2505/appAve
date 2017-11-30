@@ -106,8 +106,8 @@ export class SolicitudesSevicioProvider {
 
 
   getSolicitudesInicio(idempleado, buscar, offset) {
+   
     return new Promise<any>(
-
       resolve => {
         this.http.get(this.url + "/app/solicitudesInicio?idempleado=" + idempleado + "&buscar=" + buscar + "&offset=" + offset)
           .map(res => res.json())
@@ -144,6 +144,7 @@ export class SolicitudesSevicioProvider {
   }
 
   buscarSolicitud(idregistro) {
+    console.log(this.url + "/app/buscar?idregistro=" + idregistro);
     return new Promise<any>(
       resolve => {
         this.http.get(this.url + "/app/buscar?idregistro=" + idregistro)

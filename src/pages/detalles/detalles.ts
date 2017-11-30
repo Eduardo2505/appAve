@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
+import { AccionSolicitudPage } from '../../pages/accion-solicitud/accion-solicitud';
 
 
 /**
@@ -38,6 +39,15 @@ export class DetallesPage {
     this.IDregistro = this.navParams.get('IDregistro');
     this.detalles();
     this.detallesFechas();
+  }
+
+  acciones() {
+    this.navCtrl.push(AccionSolicitudPage, { IDregistro:this.IDregistro,
+      estado: this.registro.estado,
+      idestado_empleado: 123,//esto si se debe de modificr
+      pantalla: 1,
+      idestado_registro:this.registro.idestado_registro,
+      tipoSolicitud:0});
   }
 
   ionViewDidLoad() {

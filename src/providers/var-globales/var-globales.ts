@@ -12,15 +12,17 @@ export class VarGlobalesProvider {
   public logo: string;
   public imgPerfil: string;
   public ulrUplad: string;
+  public imgmp: string;
   constructor(public http: Http) {
-    //this.ulr = "http://127.0.0.1/Ave";
+    this.ulr = "http://127.0.0.1/Ave";
     //this.ulr="http://desa.pvessy.com/Avedesa";
-    this.ulr="http://adminave.pvessy.com/Ave";
+    //this.ulr="http://adminave.pvessy.com/Ave";
     this.ulrUplad="http://adminave.pvessy.com/ionic/upload.php";
     this.imgAprobados=this.ulr+"/imgApp/unopng.png";
     this.imgPendiente=this.ulr+"/imgApp/dospng.png";
     this.logo=this.ulr+"/imgApp/logo.png";
     this.imgPerfil=this.ulr+"/imgApp/user_default.png";
+    this.imgmp=this.ulr+"/imgApp/advance-card-map-madison.png";
     
   }
 
