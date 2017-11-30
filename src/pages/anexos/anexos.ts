@@ -27,6 +27,7 @@ export class AnexosPage {
   private nombreArchivo: string;
   private folio: string;
   public url: string;
+  public idempleado: number;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,6 +43,8 @@ export class AnexosPage {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
+    this.idempleado= this.navParams.get('idempleado');
+    console.log(this.idempleado);
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
@@ -73,7 +76,7 @@ export class AnexosPage {
         var f = new Date();
         this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
 
-        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro;
+        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro+".jpg";
 
 
         let options1: FileUploadOptions = {
@@ -87,20 +90,36 @@ export class AnexosPage {
           .then((data) => {
             // success
             loading.dismiss();
+           
+
+            this.solicitudes.registraAnexo(this.tipo,this.nombreArchivo,this.idempleado,this.IDregistro)
+            .then(
+            data => {
+    
+              
+            }
+            )
+            .catch(
+            error => {
+              console.log(error);
+            }
+            )
             // alert("Se subio");
 
           }, (err) => {
             // error
-            alert("error" + JSON.stringify(err));
+            console.log("Error");
           });
 
 
 
       }
 
+      
 
     }, (err) => { });
-
+    
+    this.getAnexos("");
   }
 
 
