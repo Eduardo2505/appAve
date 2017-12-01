@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform, LoadingController,ModalController } from 'ionic-angular';
 
 import { SolicitudesSevicioProvider } from '../../providers/solicitudes-sevicio/solicitudes-sevicio';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 //import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
-import { PopImagenPage } from '../pop-imagen/pop-imagen';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {PopImagenPage} from '../pop-imagen/pop-imagen';
 import { VarGlobalesProvider } from '../../providers/var-globales/var-globales';
-
-
 
 @IonicPage()
 @Component({
@@ -27,7 +25,6 @@ export class AnexosPage {
   private nombreArchivo: string;
   private folio: string;
   public url: string;
-  public idempleado: number;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -38,13 +35,13 @@ export class AnexosPage {
     public loadingCtrl: LoadingController,
     private transfer: FileTransfer,
     private iab: InAppBrowser,
-    private modal: ModalController,
+    private modal:ModalController,
     public varGlobal: VarGlobalesProvider) {
 
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
-    this.idempleado= this.navParams.get('idempleado');
-    console.log(this.idempleado);
+    console.log("tipo: " + this.tipo);
+    console.log("IdRegistro: " + this.IDregistro);
     this.platform = platform;
     this.getAnexos("");
     this.url = varGlobal.ulrUplad;
@@ -76,7 +73,7 @@ export class AnexosPage {
         var f = new Date();
         this.folio = "" + f.getDate() + (f.getMonth() + 1) + f.getFullYear() + f.getHours() + f.getMinutes() + f.getSeconds();
 
-        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro+".jpg";
+        this.nombreArchivo = this.folio + i + "_" + this.tipo + "_" + this.IDregistro;
 
 
         let options1: FileUploadOptions = {
@@ -90,55 +87,31 @@ export class AnexosPage {
           .then((data) => {
             // success
             loading.dismiss();
-           
-
-            this.solicitudes.registraAnexo(this.tipo,this.nombreArchivo,this.idempleado,this.IDregistro)
-            .then(
-            data => {
-    
-              
-            }
-            )
-            .catch(
-            error => {
-              console.log(error);
-            }
-            )
             // alert("Se subio");
 
           }, (err) => {
             // error
-            console.log("Error");
+            alert("error" + JSON.stringify(err));
           });
 
 
 
       }
 
-      
 
     }, (err) => { });
-    
-    this.getAnexos("");
+
   }
 
 
 
-  /*launchUrl(url) {
+  launchUrl(url) {
     //console.log(url);
     const browser = this.iab.create(url, "_system");
-  }*/
-
-  launchUrl(url: string) {
-    const options: InAppBrowserOptions = {
-      zoom: 'no'
-    }
-    const browser = this.iab.create(url, '_self', options);
-    
   }
 
-  pop(url, desc) {
-    this.modal.create(PopImagenPage, { url: url, des: desc });
+  pop(url,desc) {
+    this.modal.create(PopImagenPage,{url:url,des:desc});
     //console.log("Pop");
 
   }
@@ -146,12 +119,16 @@ export class AnexosPage {
 
 
   getAnexos(buscaraux) {
+
+
+
     return new Promise(resolve => {
+
       this.solicitudes.getAnexos(this.IDregistro, buscaraux, this.tipo, this.offset)
         .then(data => {
-          
-          this.registros=data;
-        
+          this.registros = data;
+          console.log(data);
+
           resolve(true);
 
         });
