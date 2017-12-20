@@ -33,6 +33,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { AnexosPage } from '../pages/anexos/anexos';
 import { MenuDesplegablePage } from '../pages/menu-desplegable/menu-desplegable';
 import { LoginPage } from '../pages/login/login';
+import { PrevioPage } from '../pages/previo/previo';
 //pipe
 import { FechaLarga  } from '../pipe/capitalize.pipe';
 import { IonicStorageModule } from '@ionic/storage';
@@ -53,7 +54,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AnexosPage,
     SolicitudesAprobadasPage,
     LoginPage,
-    FechaLarga
+    FechaLarga,
+    PrevioPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MenuDesplegablePage,
     SolicitudesAprobadasPage,
     AnexosPage,
-    LoginPage
+    LoginPage,
+    PrevioPage
   ],
   providers: [
     StatusBar,

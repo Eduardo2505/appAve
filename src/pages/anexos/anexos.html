@@ -23,12 +23,11 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding >
 
 
-  <ion-list>
-
-    <ion-item-sliding #item *ngFor="let i of registros">
+  <ion-list *ngIf="banderaver==0">
+    <ion-item-sliding #item *ngFor="let i of registros" >
         
         <ion-item (click)="launchUrl(i.urlDropbox)" *ngIf="i.dropbox==1">
           <ion-icon name="ios-albums" item-left></ion-icon>
@@ -45,6 +44,22 @@
     </ion-item-sliding>
   </ion-list>
 
+
+  <ion-list *ngIf="banderaver==1">
+      <ion-item-sliding #item *ngFor="let i of auxImg" >
+          
+          <ion-item>
+            <ion-icon name="ios-albums" item-left></ion-icon>
+            {{i}} 
+          </ion-item>
+         
+  
+  
+      </ion-item-sliding>
+    </ion-list>
+  
+ 
+
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingText="Cargando..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -53,10 +68,13 @@
     <ion-toolbar color="primary">
       <ion-buttons>
 
-
         <button ion-button icon-left (click)="galeria()">
           <ion-icon name="cloud-upload"></ion-icon>Cargar de Galería
         </button>
+
+        <button ion-button icon-left (click)="ver()" *ngIf="banderaver==1">
+            <ion-icon name="cloud-upload"></ion-icon>ver
+          </button>
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>
