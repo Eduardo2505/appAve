@@ -42,7 +42,7 @@ export class AnexosPage {
     private modal:ModalController,
     public varGlobal: VarGlobalesProvider) {
     this.banderaver=0;
-    console.log(">>>>><"+this.banderaver);
+    //console.log(">>>>><"+this.banderaver);
     this.IDregistro = this.navParams.get('IDregistro');
     this.tipo = this.navParams.get('tipo');
     this.platform = platform;
@@ -57,11 +57,29 @@ export class AnexosPage {
     this.viewCtrl.showBackButton(false);
 
   }
+
+  limpiar() {
+
+    this.getAnexos("");
+    this.banderaver=0;
+    this.auxImg=[];
+  }
+
+
   galeria() {
 
 
+    for (var i = 0; i < 4; i++) {
 
-    let options = {
+
+      this.auxImg.push("201220170935"+i+"_1_6316.jpg");
+      this.banderaver=1;
+
+    }
+
+
+
+    /* let options = {
       quality: 60,
       maximumImagesCount: 5
     };
@@ -72,8 +90,11 @@ export class AnexosPage {
       });
 
       loading.present();
+
+
+
       for (var i = 0; i < results.length; i++) {
-        //console.log('Image URI: ' + results[i]);
+     
 
         const fileTransfer: FileTransferObject = this.transfer.create();
         var f = new Date();
@@ -88,14 +109,12 @@ export class AnexosPage {
           headers: {}
 
         }
-        
-
         fileTransfer.upload(results[i], this.url, options1)
           .then((data) => {
             loading.dismiss();
 
           }, (err) => {
-            // error
+           
             alert("error" + JSON.stringify(err));
           });
           
@@ -105,20 +124,35 @@ export class AnexosPage {
           
 
       }
+
+      
+
+
+
      
     }, (err) => { 
 
 
-    });
+    });*/
 
     
-    //
+    
   }
+
+  guardar(){
+    
+    for(var i = this.auxImg.length - 1; i >= 0; i--) {
+        console.log(this.auxImg[i]);
+    
+      }
+
+      this.limpiar();
+    }
 
  
   ver() {
     //console.log(url);
-    this.navCtrl.push(PrevioPage, { auxImg: this.auxImg});
+    this.navCtrl.push(PrevioPage, { auxImg: this.auxImg,IDregistro:this.IDregistro,tipo:this.tipo});
   }
 
 

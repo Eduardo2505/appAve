@@ -6,20 +6,41 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Previo</ion-title>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>Anexos</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="guardar()">
+            <ion-icon name="ios-cloud-upload"></ion-icon>GUARDAR
+        </button>
+      </ion-buttons>
   </ion-navbar>
-
+  
 </ion-header>
 
 
-<ion-content class="card-background-page">
-    <div #item *ngFor="let i of auxImg">
-        
-     <ion-card >
-        
-         <img src="{{ulrAuximg}}{{i}}" /> 
-      
+<ion-content class="cards-bg" >
+    
+   
+     <div #item *ngFor="let i of auxImg" > 
+     
+     <ion-card class="adv-map">
+       <div style="position: relative">
+         <img src="{{ulrAuximg}}{{i}}">
+     
+         <ion-fab right top>
+           <button ion-fab color="danger" class="fab-map" (click)="eliminar(i)">
+              <ion-icon name="md-trash"></ion-icon>
+           </button>
+         </ion-fab>
+       </div>
+
+     
+     
      </ion-card>
-   </div>
-</ion-content>
+     
+   </div> 
+ 
+     
+     </ion-content>
+
+

@@ -17,7 +17,7 @@
 
   <ion-toolbar color="primary">
 
-    <ion-searchbar (ionInput)="getItems($event)" placeholder="Archivo"></ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)" *ngIf="banderaver==0" placeholder="Archivo"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>
@@ -68,12 +68,22 @@
     <ion-toolbar color="primary">
       <ion-buttons>
 
-        <button ion-button icon-left (click)="galeria()">
+        <button ion-button icon-left (click)="galeria()" *ngIf="banderaver==0">
           <ion-icon name="cloud-upload"></ion-icon>Cargar de Galería
         </button>
 
-        <button ion-button icon-left (click)="ver()" *ngIf="banderaver==1">
-            <ion-icon name="cloud-upload"></ion-icon>ver
+        
+
+          <button ion-button icon-left (click)="ver()" *ngIf="banderaver==1">
+            <ion-icon name="md-open"></ion-icon>VISTA PREVIA
+          </button>
+
+          <button ion-button icon-left (click)="guardar()" *ngIf="banderaver==1">
+            <ion-icon name="ios-cloud-upload"></ion-icon>GUARDAR
+          </button>
+
+          <button ion-button icon-left (click)="limpiar()" *ngIf="banderaver==1">
+            <ion-icon name="md-close-circle"></ion-icon>LIMPIAR
           </button>
       </ion-buttons>
     </ion-toolbar>
